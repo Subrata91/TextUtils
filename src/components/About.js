@@ -33,7 +33,7 @@ export default function About() {
           setFullDarkMode({
             color:"#fff",
             backgroundColor:"#000",
-            textAlign:"center"
+            textAlign:"center",
           })  
           setBtnText("Enable Light Mode")
         }
@@ -42,7 +42,7 @@ export default function About() {
           setFullDarkMode({
             color:"#000",
             backgroundColor:"#fff",
-            textAlign:"center"
+            textAlign:"center",
           })
           setBtnText("Enable Dark Mode")
         }

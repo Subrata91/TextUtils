@@ -6,11 +6,13 @@ export default function TextForm(props) {
   const handleUpClick = () => {
     // console.log("The button was clicked.");
     setText(text.toUpperCase());
+    props.showAlert("Converted to Upper Case", "success");
   };
 
   const handleLoClick = () => {
     // console.log("The button was clicked.");
     setText(text.toLowerCase());
+    props.showAlert("Converted to Lower Case", "success");
   };
 
   const handletextExtract = () => {
@@ -19,6 +21,7 @@ export default function TextForm(props) {
     const letters = text.match(regex);
     const res1 = letters.join("");
     setText(res1);
+    props.showAlert("Special characters have been removed", "success");
   };
 
   const handleNumExtract = () => {
@@ -27,11 +30,13 @@ export default function TextForm(props) {
     const digits = text.match(regex);
     const res = digits.join("");
     setText(res);
+    props.showAlert("Only numbers are being shown", "success");
   };
 
   const handleExtraSpaces = () => {
     const newText = text.replace(/\s+/g, " ").trim();
     setText(newText);
+    props.showAlert("All extra spaces have been removed", "success");
   };
 
   const capitalFirstLetter = ()=>{
@@ -40,7 +45,16 @@ export default function TextForm(props) {
     words.forEach(element => {
        uppercaseword += element.charAt(0).toUpperCase() + element.slice(1) + " "
     });
-    setText(uppercaseword)
+    setText(uppercaseword);
+    props.showAlert("First character has been capitalized", "success");
+}
+
+const handleCopy = () => {
+  var text = document.getElementById("myBox");
+  text.select();
+  text.setSelectionRange(0,9999);
+  navigator.clipboard.writeText(text.value);
+  props.showAlert("Copied to clipboard!!", "success");
 }
 
   const handleOnChange = (event) => {
@@ -50,7 +64,7 @@ export default function TextForm(props) {
 
   return (
     <>
-      <div className="container my-3">
+      <div className="container my-3" style={{color:props.mode==='dark'?'white':'black'}}>
         <h4>{props.heading}</h4>
         <div className="mb-3">
           <textarea
@@ -60,6 +74,7 @@ export default function TextForm(props) {
             placeholder="Leave a comment here"
             id="myBox"
             rows="8"
+            style={{backgroundColor:props.mode==='dark'?'#0C2D48':'white', color:props.mode==='dark'?'white':'black'}}
           ></textarea>
         </div>
         <button className="btn btn-primary mx-2 my-2" onClick={handleUpClick}>
@@ -80,14 +95,17 @@ export default function TextForm(props) {
         <button className="btn btn-primary mx-2 my-2" onClick={capitalFirstLetter}>
           First Letter Capital
         </button>
+        <button className="btn btn-primary mx-2 my-2" onClick={handleCopy}>
+          Copy Text
+        </button>
       </div>
-      <div className="container my-3">
+      <div className="container my-3" style={{color:props.mode==='dark'?'white':'black'}}>
         <h2 className="my-3">Your text summary</h2>
         <p>
           <strong>Number of Characters:</strong> {text.length}
         </p>
         <p>
-          <strong>Number of Words:</strong> {text.split(" ").length - 1}
+          <strong>Number of Words:</strong> {text.split(" ").length}
         </p>
         <p>
           <strong>Expected time taken to read:</strong>{" "}
