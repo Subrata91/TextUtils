@@ -50,10 +50,8 @@ export default function TextForm(props) {
 }
 
 const handleCopy = () => {
-  var text = document.getElementById("myBox");
-  text.select();
-  text.setSelectionRange(0,9999);
-  navigator.clipboard.writeText(text.value);
+  
+  navigator.clipboard.writeText(text);
   props.showAlert("Copied to clipboard!!", "success");
 }
 
@@ -77,25 +75,25 @@ const handleCopy = () => {
             style={{backgroundColor:props.mode==='dark'?'#0C2D48':'white', color:props.mode==='dark'?'white':'black'}}
           ></textarea>
         </div>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleUpClick}>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleUpClick}>
           Convert to Upper-Case
         </button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleLoClick}>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleLoClick}>
           Convert to Lower-Case
         </button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handletextExtract}>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handletextExtract}>
           Remove Symbols
         </button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleNumExtract}>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleNumExtract}>
           Show Only Numbers
         </button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleExtraSpaces}>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleExtraSpaces}>
           Remove Extra Spaces
         </button>
-        <button className="btn btn-primary mx-2 my-2" onClick={capitalFirstLetter}>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={capitalFirstLetter}>
           First Letter Capital
         </button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleCopy}>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleCopy}>
           Copy Text
         </button>
       </div>
@@ -105,11 +103,11 @@ const handleCopy = () => {
           <strong>Number of Characters:</strong> {text.length}
         </p>
         <p>
-          <strong>Number of Words:</strong> {text.split(" ").length}
+          <strong>Number of Words:</strong> {text.split(/\s+/).filter((element)=>{return element.length!==0}).length}
         </p>
         <p>
           <strong>Expected time taken to read:</strong>{" "}
-          {0.008 * (text.split(" ").length - 1)}
+          {0.008 * (text.split(" ").length)} secs
         </p>
         <h4 className="my-5">Preview:</h4>
         <p>{text}</p>

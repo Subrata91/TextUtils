@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import About from "./components/About.js";
+import About2 from "./components/About2.js";
 import Navbar from "./components/Navbar.js";
 import TextForm from "./components/TextForm.js";
 import Alert from "./components/Alert.js";
@@ -38,7 +38,7 @@ function App() {
         <Alert alert={alert} />
         <div className="container my-5">
           <Routes>
-            <Route exact path="/about" element={<About />} />
+            <Route exact path="/about" element={<About2 mode={mode} />} />
 
             <Route
               exact

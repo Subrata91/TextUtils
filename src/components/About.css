@@ -1,8 +1,4 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-  }
-  
+
   html {
     box-sizing: border-box;
   }
@@ -40,9 +36,6 @@ body {
     display: table;
   }
   
-  .title {
-    color: grey;
-  }
   
   .button {
     border: none;
